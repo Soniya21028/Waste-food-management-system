@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate Food</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <div class="text-center mt-3">
+    <a href="homepage.html" class="btn btn-outline-primary w-100">Back to Home</a>
+  </div>
+  <style>
+    body {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      width: 100%;
+      max-width: 650px;
+      border-radius: 1rem;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+    }
+    .form-label {
+      font-weight: 600;
+    }
+    .btn {
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .form-control:focus {
+      border-color: #0072ff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 114, 255, 0.25);
+    }
+    .tooltip-icon {
+      cursor: pointer;
+      color: #0072ff;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card p-4 bg-white">
+  <h3 class="text-center mb-4 fw-bold">🍱 Food Donation Form</h3>
+  <form id="donationForm" action="#" method="POST" novalidate>
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input type="text" name="name" class="form-control" required placeholder="Your full name">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" name="email" class="form-control" required placeholder="example@domain.com">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Phone Number
+        <span class="tooltip-icon" data-bs-toggle="tooltip" title="Enter 10-digit number">ℹ️</span>
+      </label>
+      <input type="tel" name="phone" class="form-control" required placeholder="1234567890">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Type of Food</label>
+      <select name="food_type" class="form-select" required>
+        <option value="">Select</option>
+        <option value="Cooked">Cooked</option>
+        <option value="Uncooked">Uncooked</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Quantity (in Kg or Units)</label>
+      <input type="text" name="quantity" class="form-control" required placeholder="E.g. 5 Kg or 10 packs">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Cooked Time (if applicable)</label>
+      <input type="datetime-local" name="cooked_time" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Pickup Address</label>
+      <textarea name="address" rows="2" class="form-control" required placeholder="Your address for pickup"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Preferred Pickup Time</label>
+      <input type="datetime-local" name="pickup_time" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-2">🚚 Submit Donation</button>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Initialize Bootstrap tooltips
+  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  });
+
+  // Form validation
+  document.getElementById("donationForm").addEventListener("submit", function(e) {
+    const phone = document.querySelector("input[name='phone']").value.trim();
+    const quantity = document.querySelector("input[name='quantity']").value.trim();
+
+    if (!/^\d{10}$/.test(phone)) {
+      alert("📞 Please enter a valid 10-digit phone number.");
+      e.preventDefault();
+      return;
+    }
+
+    if (isNaN(quantity) || quantity <= 0) {
+      alert("📦 Please enter a valid quantity.");
+      e.preventDefault();
+      return;
+    }
+  });
+</script>
+
+</body>
+</html>
